@@ -13,7 +13,7 @@ The system uses a simple **Room Code** architecture to connect devices via Fireb
 
 * **Judge (Admin)**: The official at the table. Has full authority to modify stats, manage the timer, and log penalties.
 * **Viewer (Backstage)**: Provides a real-time, mainly read-only mirror of the match, with limited, focused interaction (e.g.: *Stat Flagging* & *Judge Call*; also see [§2.Judge Call & Ownership](#judge-call-and-ownership))
-    * **Stat Flagging**: Viewers can tap any resource card to "flag" it (turning it red on the Judge's screen). This allows backstage officials to discreetly signal a potential error (such as a missed draw or incorrect rune count) without verbal interruption.
+    * **Stat Flagging**: Viewers can tap any resource container to "flag" it (turning it red on the Judge's screen). This allows backstage judges to discreetly signal a potential error (such as a missed draw or incorrect rune count) without verbal interruption.
 
 ---
 
@@ -27,11 +27,11 @@ To ensure the log and resources are accurate, the Judge must trigger the **"My T
 * **Global Sync**: Updates the turn status for all Viewers and logs the event with a timestamp.
 
 ### Scoring Dynamics
-The **Points** container is enhanced with specific shortcuts:
+The **Points** container has specific shortcuts:
 * **Standard (+/-)**: For generic adjustment.
 * **Conquer (+C)**: Specifically for points gained through *Conquer*.
 * **Hold (+H)**: Specifically for points gained through *Hold*.
-* *Note: All scoring types are explicitly labeled in the match history log for post-match audit.*
+* *Note: Scoring types are explicitly labeled in the match history log for post-match audit.*
 
 ### Judge Call and Ownership 
 The **Judge Call** is a global alert system that triggers a pulsing red overlay on all connected devices.
@@ -75,7 +75,7 @@ To prevent accidental data loss, the tool implements a **History API interceptor
 ## 5. Other Notes and License
 
 * **Undo Engine**: A 30-step deep undo stack allows the Judge to revert any accidental input instantly.
-   * The Undo engine also reverts global flags and ownership markers. *If a Viewer triggers an accidental Judge Call*, the Judge (admin) can use Undo to revert the match to a "Pre-Call" state, effectively erasing the accidental alert and its corresponding log entry.
+   * The Undo engine also reverts global flags and ownership markers. *If a Viewer triggers an accidental Judge Call*, the Judge (admin) can use Undo to revert the match to a "pre-call" state, effectively erasing the accidental alert and its corresponding log entry.
 * **Wake Lock**: By toggling the dedicated option in the settings menu, it's possible to prevent mobile screens from dimming.
 * **Colorblind Mode**: *Currently WiP*; in the Settings menu a dedicated toggle will switch the colors of some elements to a more colorblind-friendly palette.
 * **License**: **Free to Use**. Provided as a community resource for the Riftbound ecosystem. You are free to host, use, and modify this tool for any local or major competitive event.
