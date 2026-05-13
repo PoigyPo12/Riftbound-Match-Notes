@@ -83,4 +83,3 @@ To prevent accidental data loss, the tool implements a **History API interceptor
 ---
 
 **Author**: Atled  
-**Architecture**: Firebase Real-time Firestore.
