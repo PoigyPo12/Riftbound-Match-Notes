@@ -35,7 +35,7 @@ The **Points** container has specific shortcuts:
 
 ### Judge Call and Ownership 
 The **Judge Call** is a global alert system that triggers a pulsing red overlay on all connected devices.
-* **Closing Ownership**: To maintain a clear chain of command, **the call must be closed by the same role that opened it**. If a Viewer opens a call, they are the only ones who can dismiss the red glow, signaling that the backstage concern has been resolved (also see ["Undo engine" in §5](#5-other-notes-and-license)).
+* **Closing Ownership**: To maintain a clear chain of command, **the call must be closed by the same role that opened it**. If a Viewer opens a call, they are the only ones who can dismiss the red glow, signaling that the backstage concern has been resolved (also see ["Undo engine" in §6](#6-other-notes-and-license)).
 
 ### Logs
 Every interaction — from a single point change to a "Judge Call" — is recorded in a **Match History**.
@@ -72,13 +72,22 @@ To prevent accidental data loss, the tool implements a **History API interceptor
 
 ---
 
-## 5. Other Notes and License
+## 5. Network resilience
+
+* **Persistent Data State**: The application handles temporary internet disconnections. All match data is queued in the device's local memory; once the connection is restored, the system automatically synchronizes pending updates with the server.
+* **Live Status indicator**: A small status LED next to the Judge's name provides visual feedback on connectivity:
+    * 🟢 **Green**: Connected and synchronized with the server.
+    * 🔴 **Red**: Offline or unstable connection. Changes made while red will be queued and pushed once the indicator returns to green.
+      
+---
+
+## 6. Other Notes and License
 
 * **Undo Engine**: A 30-step deep undo stack allows the Judge to revert any accidental input instantly.
    * The Undo engine also reverts global flags and ownership markers. *If a Viewer triggers an accidental Judge Call*, the Judge (admin) can use Undo to revert the match to a "pre-call" state, effectively erasing the accidental alert and its corresponding log entry.
 * **Wake Lock**: By toggling the dedicated option in the settings menu, it's possible to prevent mobile screens from dimming.
 * **Colorblind Mode**: *Currently WiP*; in the Settings menu a dedicated toggle will switch the colors of some elements to a more colorblind-friendly palette.
-* **License**: **Free to Use**. Provided as a community resource for the Riftbound ecosystem. You are free to host, use, and modify this tool for any local or major competitive event.
+* **License**: **Free to Use**. Provided as a community resource. You are free to host, use, and modify this tool for any local or major competitive event.
 
 ---
 
