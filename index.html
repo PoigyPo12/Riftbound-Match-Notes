@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#060a14">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -17,59 +17,109 @@
     <link rel="manifest" href="manifest.json">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
     
 <body class="safe-padding">
 
+    <!-- SETUP SCREEN -->
     <div id="setup-screen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-md w-full border border-slate-700">
-            <h1 class="text-3xl font-bold text-center mb-8 text-teal-400">RB Match Buddy</h1>
-            <div class="space-y-5">
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="text" id="setup-user-name" autocomplete="off" class="col-span-2 bg-slate-900 border border-slate-700 rounded-lg p-3 text-white" placeholder="Judge Name">
-                    <input type="number" id="setup-table-num" autocomplete="off" class="col-span-1 bg-slate-900 border border-slate-700 rounded-lg p-3 text-white" placeholder="Table">
-                </div>
-                <div class="space-y-3">
-                    <input type="text" id="setup-p1-name" autocomplete="off" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white" placeholder="Player 1">
-                    <input type="text" id="setup-p2-name" autocomplete="off" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white" placeholder="Player 2">
-                    <button id="btn-create-room" class="w-full bg-teal-600 text-white font-bold py-3 rounded-lg active:scale-95 transition">Create Match</button>
-                </div>
-                <div class="relative py-2 text-center text-xs text-slate-500 uppercase">or</div>
-                <div class="space-y-3">
-                    <input type="text" id="setup-room-code" autocomplete="off" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white uppercase text-center font-mono" placeholder="CODE">
-                    <button id="btn-join-room" class="w-full bg-slate-700 text-white font-bold py-3 rounded-lg active:scale-95 transition">Join (Viewer)</button>
+        <div class="w-full max-w-md">
+            <!-- Logo / Title -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-extrabold tracking-tight mb-1" style="background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 40%, #5eead4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">RB Match Buddy</h1>
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500 font-semibold">Feature Match Assistant</p>
+            </div>
+
+            <!-- Card -->
+            <div style="background: rgba(10, 16, 30, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);" class="rounded-2xl p-7">
+                <div class="space-y-5">
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="text" id="setup-user-name" autocomplete="off" 
+                            style="background: rgba(15,23,42,0.8); font-family: 'Plus Jakarta Sans', sans-serif;"
+                            class="col-span-2 border border-slate-700/60 rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm" placeholder="Judge Name">
+                        <input type="number" id="setup-table-num" autocomplete="off" 
+                            style="background: rgba(15,23,42,0.8); font-family: 'JetBrains Mono', monospace;"
+                            class="col-span-1 border border-slate-700/60 rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm text-center" placeholder="Tbl">
+                    </div>
+                    <div class="space-y-3">
+                        <input type="text" id="setup-p1-name" autocomplete="off" 
+                            style="background: rgba(13,148,136,0.06); font-family: 'Plus Jakarta Sans', sans-serif; border-color: rgba(13,148,136,0.2);"
+                            class="w-full border rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm" placeholder="Player 1">
+                        <input type="text" id="setup-p2-name" autocomplete="off" 
+                            style="background: rgba(249,115,22,0.05); font-family: 'Plus Jakarta Sans', sans-serif; border-color: rgba(249,115,22,0.15);"
+                            class="w-full border rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm" placeholder="Player 2">
+                        <button id="btn-create-room" 
+                            style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); box-shadow: 0 4px 20px rgba(13,148,136,0.35), inset 0 1px 0 rgba(255,255,255,0.1);"
+                            class="w-full text-white font-bold py-3.5 rounded-xl active:scale-95 transition-all text-sm uppercase tracking-wider">
+                            Create Match
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-3 py-1">
+                        <div class="flex-1 h-px bg-slate-800"></div>
+                        <span class="text-[10px] text-slate-600 uppercase tracking-widest font-bold">or</span>
+                        <div class="flex-1 h-px bg-slate-800"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <input type="text" id="setup-room-code" autocomplete="off" 
+                            style="background: rgba(15,23,42,0.8); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3em;"
+                            class="w-full border border-slate-700/60 rounded-xl p-3 text-teal-300 placeholder-slate-600 text-center font-bold uppercase" placeholder="CODE">
+                        <button id="btn-join-room" 
+                            style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);"
+                            class="w-full text-slate-300 font-bold py-3.5 rounded-xl active:scale-95 transition-all text-sm uppercase tracking-wider">
+                            Join (Viewer)
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- APP SCREEN -->
     <div id="app-screen" class="hidden min-h-screen flex flex-col relative">
-        <header class="h-16 bg-slate-800/80 sticky top-0 z-40 border-b border-slate-700 flex justify-between items-center px-4 shrink-0 backdrop-blur-sm gap-2">
+        
+        <!-- Header -->
+        <header class="h-16 sticky top-0 z-40 border-b flex justify-between items-center px-4 shrink-0 gap-2">
             <div class="flex flex-col min-w-0 flex-1 justify-center">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-[8px] uppercase text-slate-400 font-bold tracking-wider">Room</span>
-                    <span id="ui-room-code" class="text-base font-mono font-black text-teal-300 tracking-wider bg-teal-900/40 px-1.5 py-0.5 rounded border border-teal-700/50">----</span>
-                    <span class="text-[8px] uppercase text-slate-400 font-bold tracking-wider ml-0.5">Tbl</span>
-                    <span id="ui-table-num" class="text-base font-mono font-black text-amber-400 tracking-wider bg-amber-900/40 px-1.5 py-0.5 rounded border border-amber-700/50">0</span>
+                    <span class="text-[8px] uppercase text-slate-500 font-bold tracking-wider">Room</span>
+                    <span id="ui-room-code" 
+                        style="font-family: 'JetBrains Mono', monospace; background: rgba(13,148,136,0.12); border-color: rgba(20,184,166,0.2); text-shadow: 0 0 12px rgba(20,184,166,0.4);"
+                        class="text-base font-black text-teal-300 tracking-widest px-2 py-0.5 rounded-lg border">----</span>
+                    <span class="text-[8px] uppercase text-slate-500 font-bold tracking-wider ml-0.5">Tbl</span>
+                    <span id="ui-table-num" 
+                        style="font-family: 'JetBrains Mono', monospace; background: rgba(249,115,22,0.1); border-color: rgba(249,115,22,0.2);"
+                        class="text-base font-black text-amber-400 tracking-wider px-2 py-0.5 rounded-lg border">0</span>
                 </div>
-                <span id="ui-judge-name" class="text-[9px] text-slate-500 font-medium truncate mt-0.5 uppercase tracking-wide flex items-center gap-1">
-                    <span id="status-dot" class="w-1.5 h-1.5 rounded-full bg-red-500 transition-colors duration-300"></span>
+                <span id="ui-judge-name" class="text-[9px] text-slate-500 font-medium truncate mt-0.5 uppercase tracking-wide flex items-center gap-1.5">
+                    <span id="status-dot" class="w-1.5 h-1.5 rounded-full bg-red-500 transition-colors duration-300 flex-shrink-0"></span>
                     JUDGE: ---
                 </span>
             </div>
             <div class="flex gap-2 shrink-0">
-                <button id="btn-flag" title="Judge Call" class="bg-slate-700 w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
+                <!-- Flag button -->
+                <button id="btn-flag" title="Judge Call" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 2px 8px rgba(0,0,0,0.3);"
+                    class="w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
                 </button>
-                <button id="btn-undo" title="Undo" class="bg-slate-700 w-11 h-11 rounded-xl flex items-center justify-center admin-only active:scale-90 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+                <!-- Undo button -->
+                <button id="btn-undo" title="Undo" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 2px 8px rgba(0,0,0,0.3);"
+                    class="w-11 h-11 rounded-xl flex items-center justify-center admin-only active:scale-90 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
                 </button>
-                <button id="btn-log" title="History" class="bg-slate-700 w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <!-- Log button -->
+                <button id="btn-log" title="History" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 2px 8px rgba(0,0,0,0.3);"
+                    class="w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 </button>
-                <button id="btn-settings" title="Settings" class="bg-slate-700 w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition overflow-hidden">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Settings button -->
+                <button id="btn-settings" title="Settings" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 2px 8px rgba(0,0,0,0.3);"
+                    class="w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition-all overflow-hidden">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2 2 2 0 0 1-2 2 2 2 0 0 0-2 2 2 2 0 0 1-2 2 2 2 0 0 0-2 2v.44a2 2 0 0 0 2 2 2 2 0 0 1 2 2 2 2 0 0 0 2 2 2 2 0 0 1 2 2 2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2 2 2 0 0 1 2-2 2 2 0 0 0 2-2 2 2 0 0 1 2-2 2 2 0 0 0 2-2v-.44a2 2 0 0 0-2-2 2 2 0 0 1-2-2 2 2 0 0 0-2-2 2 2 0 0 1-2-2 2 2 0 0 0-2-2z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
@@ -77,73 +127,144 @@
             </div>
         </header>
 
+        <!-- Viewer hint -->
         <div id="viewer-hint" class="hidden text-center text-[10px] text-teal-500 pt-4 pb-2 px-6 uppercase font-black tracking-widest leading-tight">
             Tap on a stat to flag it to the judge; you'll unflag it, too
         </div>
         
+        <!-- Play area -->
         <main class="play-area flex-none" id="play-area"></main>
 
+        <!-- Timer -->
         <div class="timer-container">
             <span class="text-[10px] uppercase font-bold text-slate-500 tracking-widest">⏱️ Extra Time*</span>
             <div id="timer-val" class="timer-display">00:00</div>
-            <div class="admin-only flex gap-3 mt-2">
-                <button id="btn-timer-toggle" class="bg-teal-600 hover:bg-teal-500 px-5 py-2 rounded-full font-bold text-[10px] uppercase transition active:scale-95">Start</button>
-                <button id="btn-timer-set" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-2 rounded-full font-bold text-[10px] uppercase transition active:scale-95">Set</button>
-                <button id="btn-timer-reset" class="bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-full font-bold text-[10px] uppercase transition active:scale-95">Reset</button>
+            <div class="admin-only flex gap-3 mt-1">
+                <button id="btn-timer-toggle" 
+                    style="background: linear-gradient(135deg, #0d9488, #0f766e); box-shadow: 0 2px 12px rgba(13,148,136,0.3);"
+                    class="px-5 py-2 rounded-full font-bold text-[10px] uppercase tracking-wider transition-all active:scale-95">Start</button>
+                <button id="btn-timer-set" 
+                    style="background: linear-gradient(135deg, #4f46e5, #4338ca); box-shadow: 0 2px 12px rgba(79,70,229,0.3);"
+                    class="px-5 py-2 rounded-full font-bold text-[10px] uppercase tracking-wider transition-all active:scale-95">Set</button>
+                <button id="btn-timer-reset" 
+                    style="background: rgba(30,41,59,0.9); border: 1px solid rgba(255,255,255,0.08);"
+                    class="px-5 py-2 rounded-full font-bold text-[10px] uppercase tracking-wider transition-all active:scale-95 text-slate-400">Reset</button>
             </div>
-            <span class="text-[9px] text-slate-600 italic mt-2">*since start of match. Always check PurpleFox</span>
+            <span class="text-[9px] text-slate-600 italic mt-1">*since start of match. Always check PurpleFox</span>
         </div>
         
         <footer class="footer-log" id="ui-last-log">Ready</footer>
     </div>
 
+    <!-- MODAL: Confirm -->
     <div id="modal-confirm" class="modal-overlay fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 rounded-2xl w-full max-w-xs border border-slate-700 shadow-2xl p-6 flex flex-col items-center text-center">
-            <h3 id="confirm-msg" class="font-bold text-slate-200 text-lg mb-6">Are you sure?</h3>
+        <div style="background: rgba(10,16,30,0.97); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 32px 80px rgba(0,0,0,0.7);" class="rounded-2xl w-full max-w-xs p-6 flex flex-col items-center text-center">
+            <h3 id="confirm-msg" class="font-bold text-slate-100 text-lg mb-6 leading-snug">Are you sure?</h3>
             <div class="flex flex-col gap-3 w-full" id="confirm-buttons"></div>
         </div>
     </div>
 
+    <!-- MODAL: Infractions -->
     <div id="modal-infractions" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800/50 backdrop-blur">
-                <h3 class="font-bold flex items-center gap-2">🛡️ <span id="inf-player-name" class="text-teal-400"></span></h3>
-                <button class="close-modal p-2">✕</button>
+        <div style="background: rgba(10,16,30,0.97); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 32px 80px rgba(0,0,0,0.7);" class="rounded-2xl w-full max-w-sm overflow-hidden flex flex-col max-h-[90vh]">
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.06);" class="p-4 flex justify-between items-center">
+                <h3 class="font-bold flex items-center gap-2 text-slate-100">🛡️ <span id="inf-player-name" class="text-teal-400"></span></h3>
+                <button class="close-modal p-2 text-slate-500 hover:text-slate-300 transition-colors text-lg leading-none">✕</button>
             </div>
             <div class="overflow-y-auto p-6 space-y-4 flex-1">
-                <div><label class="text-[10px] uppercase font-bold text-slate-500 block mb-3 tracking-widest">History</label><div id="inf-list" class="space-y-2"></div></div>
-                <div id="inf-form" class="hidden border-t border-slate-700 pt-6 mt-4">
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-slate-500 block mb-3 tracking-widest">History</label>
+                    <div id="inf-list" class="space-y-2"></div>
+                </div>
+                <div id="inf-form" class="hidden border-t pt-6 mt-4" style="border-color: rgba(255,255,255,0.06);">
                     <div class="space-y-4">
-                        <div><label class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Infraction Type</label><select id="inf-type" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white"><option value="" disabled selected>Select Type</option><option value="GPE">GPE</option><option value="TE">TE</option><option value="UC">UC</option></select></div>
-                        <div id="inf-subtype-container" class="hidden"><label class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Infraction Subtype</label><select id="inf-subtype" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white"><option value="" disabled selected>Select Subtype</option></select></div>
-                        <div id="inf-penalty-container" class="hidden"><label class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Penalty</label><select id="inf-penalty" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white"><option value="" disabled selected>Select Penalty</option><option value="No Penalty">No Penalty</option><option value="Warning">Warning</option><option value="Game Loss">Game Loss</option><option value="Match Loss">Match Loss</option><option value="DQ">DQ</option></select></div>
-                        <div class="flex gap-2"><button onclick="toggleInfForm(false)" class="flex-1 bg-slate-700 text-white font-bold py-3 rounded-xl">Cancel</button><button id="btn-add-infraction" disabled class="flex-[2] bg-red-600 disabled:bg-slate-600 disabled:opacity-50 text-white font-bold py-3 rounded-xl">Assign Penalty</button></div>
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-slate-500 block mb-2 tracking-widest">Infraction Type</label>
+                            <select id="inf-type" style="background: rgba(15,23,42,0.9); border: 1px solid rgba(255,255,255,0.08); font-family: 'Plus Jakarta Sans', sans-serif;" class="w-full rounded-xl p-2.5 text-slate-100 focus:outline-none focus:border-teal-500/50">
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="GPE">GPE</option>
+                                <option value="TE">TE</option>
+                                <option value="UC">UC</option>
+                            </select>
+                        </div>
+                        <div id="inf-subtype-container" class="hidden">
+                            <label class="text-[10px] uppercase font-bold text-slate-500 block mb-2 tracking-widest">Infraction Subtype</label>
+                            <select id="inf-subtype" style="background: rgba(15,23,42,0.9); border: 1px solid rgba(255,255,255,0.08); font-family: 'Plus Jakarta Sans', sans-serif;" class="w-full rounded-xl p-2.5 text-slate-100 focus:outline-none focus:border-teal-500/50">
+                                <option value="" disabled selected>Select Subtype</option>
+                            </select>
+                        </div>
+                        <div id="inf-penalty-container" class="hidden">
+                            <label class="text-[10px] uppercase font-bold text-slate-500 block mb-2 tracking-widest">Penalty</label>
+                            <select id="inf-penalty" style="background: rgba(15,23,42,0.9); border: 1px solid rgba(255,255,255,0.08); font-family: 'Plus Jakarta Sans', sans-serif;" class="w-full rounded-xl p-2.5 text-slate-100 focus:outline-none focus:border-teal-500/50">
+                                <option value="" disabled selected>Select Penalty</option>
+                                <option value="No Penalty">No Penalty</option>
+                                <option value="Warning">Warning</option>
+                                <option value="Game Loss">Game Loss</option>
+                                <option value="Match Loss">Match Loss</option>
+                                <option value="DQ">DQ</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="toggleInfForm(false)" 
+                                style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07);"
+                                class="flex-1 text-slate-300 font-bold py-3 rounded-xl text-sm transition-all active:scale-95">Cancel</button>
+                            <button id="btn-add-infraction" disabled 
+                                style="background: linear-gradient(135deg, #dc2626, #b91c1c);"
+                                class="flex-[2] disabled:opacity-30 disabled:bg-none disabled:bg-slate-700 text-white font-bold py-3 rounded-xl text-sm transition-all active:scale-95">Assign Penalty</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="inf-footer" class="p-4 border-t border-slate-700 bg-slate-900/50 admin-only"><button onclick="toggleInfForm(true)" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition"><span>🔨</span> Assign New Penalty</button></div>
+            <div id="inf-footer" style="border-top: 1px solid rgba(255,255,255,0.06); background: rgba(6,10,20,0.6);" class="p-4 admin-only">
+                <button onclick="toggleInfForm(true)" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.08);"
+                    class="w-full text-slate-200 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-sm">
+                    <span>🔨</span> Assign New Penalty
+                </button>
+            </div>
         </div>
     </div>
 
+    <!-- MODAL: Log -->
     <div id="modal-log" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 rounded-2xl w-full max-w-lg h-[80vh] flex flex-col border border-slate-700 shadow-2xl overflow-hidden">
-            <div class="p-4 border-b border-slate-700 flex justify-between items-center"><h3 class="font-bold">Match History</h3><button class="close-modal p-2">✕</button></div>
-            <div id="log-container" class="p-4 overflow-y-auto flex-1 font-mono text-xs space-y-2"></div>
-            <div class="p-4 border-t border-slate-700 grid grid-cols-2 gap-2"><button id="btn-copy-log" class="bg-slate-700 hover:bg-slate-600 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><span id="copy-btn-text">Copy</span></button><button id="btn-export" class="bg-teal-700 hover:bg-teal-600 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Download</button></div>
+        <div style="background: rgba(10,16,30,0.97); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 32px 80px rgba(0,0,0,0.7);" class="rounded-2xl w-full max-w-lg h-[80vh] flex flex-col overflow-hidden">
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.06);" class="p-4 flex justify-between items-center">
+                <h3 class="font-bold text-slate-100 tracking-wide">Match History</h3>
+                <button class="close-modal p-2 text-slate-500 hover:text-slate-300 transition-colors text-lg leading-none">✕</button>
+            </div>
+            <div id="log-container" style="font-family: 'JetBrains Mono', monospace;" class="p-4 overflow-y-auto flex-1 text-xs space-y-1.5 text-slate-400"></div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.06);" class="p-4 grid grid-cols-2 gap-2">
+                <button id="btn-copy-log" 
+                    style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07);"
+                    class="py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-95 text-slate-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    <span id="copy-btn-text">Copy</span>
+                </button>
+                <button id="btn-export" 
+                    style="background: linear-gradient(135deg, #0d9488, #0f766e); box-shadow: 0 2px 12px rgba(13,148,136,0.25);"
+                    class="py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-95 text-white">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download
+                </button>
+            </div>
         </div>
     </div>
 
+    <!-- MODAL: Settings -->
     <div id="modal-settings" class="modal-overlay fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 rounded-2xl w-full max-w-sm border border-slate-700 shadow-2xl overflow-hidden">
-            <div class="p-4 border-b border-slate-700 flex justify-between items-center"><h3 class="font-bold">Settings</h3><button class="close-modal p-2">✕</button></div>
+        <div style="background: rgba(10,16,30,0.97); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 32px 80px rgba(0,0,0,0.7);" class="rounded-2xl w-full max-w-sm overflow-hidden">
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.06);" class="p-4 flex justify-between items-center">
+                <h3 class="font-bold text-slate-100 tracking-wide">Settings</h3>
+                <button class="close-modal p-2 text-slate-500 hover:text-slate-300 transition-colors text-lg leading-none">✕</button>
+            </div>
             <div class="p-5 space-y-5">
-                
-                <div class="flex flex-col bg-slate-900/50 rounded-xl border border-slate-700 overflow-hidden">
+
+                <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06);" class="flex flex-col rounded-xl overflow-hidden">
                     
-                    <div class="flex items-center justify-between p-3 border-b border-slate-700/50">
+                    <div style="border-bottom: 1px solid rgba(255,255,255,0.05);" class="flex items-center justify-between p-3.5">
                         <div>
                             <span class="block font-bold text-slate-200 text-sm">Wake Lock</span>
-                            <span class="text-[9px] text-slate-500 uppercase font-black">Keep Screen On</span>
+                            <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">Keep Screen On</span>
                         </div>
                         <label class="switch scale-90 origin-right">
                             <input type="checkbox" id="toggle-wakelock">
@@ -151,10 +272,10 @@
                         </label>
                     </div>
 
-                    <div class="flex items-center justify-between p-3 border-b border-slate-700/50">
+                    <div style="border-bottom: 1px solid rgba(255,255,255,0.05);" class="flex items-center justify-between p-3.5">
                         <div>
                             <span class="block font-bold text-slate-200 text-sm">Colorblind Mode</span>
-                            <span class="text-[9px] text-slate-500 uppercase font-black">[WiP] High contrast colors</span>
+                            <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[WiP] High contrast colors</span>
                         </div>
                         <label class="switch scale-90 origin-right">
                             <input type="checkbox" id="toggle-colorblind">
@@ -162,24 +283,44 @@
                         </label>
                     </div>
                     
-                    <div class="admin-only flex items-center justify-between p-3 gap-2">
+                    <div class="admin-only flex items-center justify-between p-3.5 gap-2">
                         <div class="shrink-0">
                             <span class="block font-bold text-slate-200 text-sm">Judge</span>
-                            <span class="text-[9px] text-slate-500 uppercase font-black">Display Name</span>
+                            <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">Display Name</span>
                         </div>
                         <div class="flex gap-2 flex-1 justify-end items-center">
-                            <input type="text" id="input-settings-judge" class="bg-slate-800 border border-slate-600 rounded-lg px-2 py-1.5 text-white text-xs w-28 text-center" autocomplete="off">
-                            <button id="btn-save-judge" class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition">Save</button>
+                            <input type="text" id="input-settings-judge" 
+                                style="background: rgba(6,10,20,0.8); border: 1px solid rgba(255,255,255,0.1); font-family: 'Plus Jakarta Sans', sans-serif;"
+                                class="rounded-lg px-2 py-1.5 text-slate-100 text-xs w-28 text-center focus:outline-none focus:border-teal-500/50" autocomplete="off">
+                            <button id="btn-save-judge" 
+                                style="background: linear-gradient(135deg, #0d9488, #0f766e);"
+                                class="text-white font-bold py-1.5 px-3 rounded-lg text-xs transition-all active:scale-95">Save</button>
                         </div>
                     </div>
                 </div>
 
-                <button id="btn-reset-match" class="w-full bg-red-900/50 border border-red-800 text-red-200 py-4 rounded-xl font-bold admin-only hover:bg-red-800 transition uppercase tracking-[0.2em] text-sm shadow-lg">Reset Game</button>
+                <button id="btn-reset-match" 
+                    style="background: rgba(127,29,29,0.2); border: 1px solid rgba(239,68,68,0.2); box-shadow: 0 2px 12px rgba(239,68,68,0.08);"
+                    class="w-full text-red-300 py-4 rounded-xl font-bold admin-only uppercase tracking-[0.2em] text-sm transition-all active:scale-95">
+                    Reset Game
+                </button>
                 
-                <div class="border-t border-slate-700 pt-5 space-y-3">
-                    <a href="https://poigypo12.github.io/riftbound-auditor/" target="_blank" class="w-full bg-indigo-900/50 border border-indigo-700 hover:bg-indigo-800/80 text-indigo-200 py-3 rounded-xl font-bold flex items-center justify-center transition gap-2 text-sm uppercase"><span>📊</span> Auditor Tool</a>
-                    <a href="https://ruinrunner.altervista.org/" target="_blank" class="w-full bg-emerald-900/50 border border-emerald-700 hover:bg-emerald-800/80 text-emerald-200 py-3 rounded-xl font-bold flex items-center justify-center transition gap-2 text-sm uppercase"><span>📚</span> Ruinrunner Compendium</a>
-                    <button id="btn-leave-room" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 py-3 rounded-xl font-bold transition text-sm uppercase">Leave Room</button>
+                <div style="border-top: 1px solid rgba(255,255,255,0.06);" class="pt-5 space-y-2.5">
+                    <a href="https://poigypo12.github.io/riftbound-auditor/" target="_blank" 
+                        style="background: rgba(67,56,202,0.15); border: 1px solid rgba(99,102,241,0.2);"
+                        class="w-full text-indigo-300 py-3 rounded-xl font-bold flex items-center justify-center transition-all gap-2 text-sm uppercase tracking-wider active:scale-95">
+                        <span>📊</span> Auditor Tool
+                    </a>
+                    <a href="https://ruinrunner.altervista.org/" target="_blank" 
+                        style="background: rgba(6,78,59,0.2); border: 1px solid rgba(16,185,129,0.2);"
+                        class="w-full text-emerald-300 py-3 rounded-xl font-bold flex items-center justify-center transition-all gap-2 text-sm uppercase tracking-wider active:scale-95">
+                        <span>📚</span> Ruinrunner Compendium
+                    </a>
+                    <button id="btn-leave-room" 
+                        style="background: rgba(30,41,59,0.7); border: 1px solid rgba(255,255,255,0.07);"
+                        class="w-full text-slate-400 py-3 rounded-xl font-bold transition-all text-sm uppercase tracking-wider active:scale-95">
+                        Leave Room
+                    </button>
                 </div>
             </div>
         </div>
@@ -243,13 +384,13 @@
         const setStatus = (isOnline) => {
             const dot = document.getElementById('status-dot');
             if (dot) {
-                dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
+                dot.className = `w-1.5 h-1.5 rounded-full transition-colors duration-300 flex-shrink-0 ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
             }
         };
         window.addEventListener('online', () => setStatus(true));
         window.addEventListener('offline', () => setStatus(false));
 
-        const triggerVibrate = () => { if (navigator.vibrate) navigator.vibrate(10); };
+        const triggerVibrate = () => {};
         const sync = async () => { if (!currentRoom) return; await setDoc(doc(db, 'matches', currentRoom), state); };
         const saveUndo = () => { undoStack.push(JSON.stringify(state)); if (undoStack.length > 30) undoStack.shift(); };
 
@@ -359,8 +500,12 @@
                     const btnNext = document.getElementById(`next-${p}`);
                     if(btnNext) {
                         btnNext.onclick = () => { 
-                            if (userRole !== 'admin') return; 
-                            triggerVibrate(); saveUndo(); 
+                            if (userRole !== 'admin') return;
+                            btnNext.classList.remove('btn-next-flash');
+                            void btnNext.offsetWidth;
+                            btnNext.classList.add('btn-next-flash');
+                            setTimeout(() => btnNext.classList.remove('btn-next-flash'), 500);
+                            saveUndo(); 
                             const board = document.getElementById(`board-${p}`);
                             board.classList.remove('turn-flash');
                             void board.offsetWidth; 
@@ -376,7 +521,7 @@
                 });
             }
             
-            document.getElementById('ui-judge-name').innerHTML = `<span id="status-dot" class="w-1.5 h-1.5 rounded-full transition-colors duration-300 ${navigator.onLine ? 'bg-green-500' : 'bg-red-500'}"></span> JUDGE: ${state.judgeName || '---'}`;
+            document.getElementById('ui-judge-name').innerHTML = `<span id="status-dot" class="w-1.5 h-1.5 rounded-full transition-colors duration-300 flex-shrink-0 ${navigator.onLine ? 'bg-green-500' : 'bg-red-500'}"></span> JUDGE: ${state.judgeName || '---'}`;
             
             const tblBadge = document.getElementById('ui-table-num');
             if (isEditingTable && userRole === 'admin') {
@@ -426,7 +571,7 @@
                         } else if (inf.startsWith('UC')) {
                             infHTML += '<span class="infraction-triangle"></span>';
                         } else {
-                            infHTML += '<span class="infraction-dot"></span>'; // Fallback di sicurezza
+                            infHTML += '<span class="infraction-dot"></span>';
                         }
                     });
                 }
@@ -447,7 +592,12 @@
                     else card.classList.remove('stat-flagged');
                 });
             });
-            document.getElementById('btn-flag').className = `w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition ${state.flag ? 'flag-active' : 'bg-slate-700'}`;
+            document.getElementById('btn-flag').className = `w-11 h-11 rounded-xl flex items-center justify-center active:scale-90 transition-all ${state.flag ? 'flag-active' : ''}`;
+            if (!state.flag) {
+                document.getElementById('btn-flag').style.cssText = "background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 2px 8px rgba(0,0,0,0.3);";
+            } else {
+                document.getElementById('btn-flag').style.cssText = "";
+            }
             updateTimerDisplay();
             updateUI();
             document.querySelectorAll('.admin-only').forEach(e => e.style.display = userRole === 'admin' ? '' : 'none');
@@ -455,7 +605,6 @@
 
         window.toggleStatFlag = (key) => {
             if (userRole !== 'viewer') return; 
-            triggerVibrate();
             if (!state.flaggedStats) state.flaggedStats = {};
             if (state.flaggedStats[key]) delete state.flaggedStats[key];
             else state.flaggedStats[key] = true;
@@ -464,7 +613,7 @@
 
         window.doUpdateStat = (p, s, d, reason) => {
             if (userRole !== 'admin') return;
-            triggerVibrate(); saveUndo(); 
+            saveUndo(); 
             const oldVal = state[p][s] || 0; 
             state[p][s] = Math.max(0, oldVal + d); 
             if (oldVal !== state[p][s]) { 
@@ -489,7 +638,6 @@
 
         document.getElementById('btn-timer-toggle').onclick = () => {
             if(userRole !== 'admin') return;
-            triggerVibrate();
             
             if (!state.timerActive) {
                 state.timerActive = true;
@@ -505,7 +653,6 @@
         
         document.getElementById('btn-timer-set').onclick = () => {
             if(userRole !== 'admin') return;
-            triggerVibrate();
             const currentMins = Math.floor(getElapsedSeconds() / 60);
             const input = prompt("Enter extra time minutes:", currentMins);
             if (input !== null) {
@@ -513,7 +660,6 @@
                 if (!isNaN(mins) && mins >= 0) {
                     saveUndo();
                     state.timerSeconds = mins * 60;
-                    // Se il timer era attivo, resettiamo il punto di partenza a "ora"
                     if (state.timerActive) state.timerStartedAt = Date.now();
                     sync(); render();
                 }
@@ -522,7 +668,6 @@
 
         document.getElementById('btn-timer-reset').onclick = () => {
             if(userRole !== 'admin') return;
-            triggerVibrate();
             state.timerSeconds = 0;
             state.timerActive = false;
             state.timerStartedAt = null;
@@ -530,7 +675,7 @@
         };
 
         window.openInfractions = (p) => {
-            triggerVibrate(); activeInfPlayer = p;
+            activeInfPlayer = p;
             document.getElementById('inf-player-name').innerText = state[p].name;
             toggleInfForm(false); updateInfList();
             document.getElementById('modal-infractions').classList.remove('hidden');
@@ -540,7 +685,7 @@
             const list = document.getElementById('inf-list');
             const p = activeInfPlayer;
             list.innerHTML = state[p].infractions?.length 
-                ? state[p].infractions.map(inf => `<div class="bg-slate-900/40 p-3 rounded-lg border border-slate-700/50 text-[11px] font-bold text-slate-200 uppercase tracking-tight leading-relaxed">${inf}</div>`).join('')
+                ? state[p].infractions.map(inf => `<div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.06);" class="p-3 rounded-xl text-[11px] font-bold text-slate-200 uppercase tracking-tight leading-relaxed">${inf}</div>`).join('')
                 : `<div class="text-xs text-slate-500 italic text-center py-8">No infractions recorded.</div>`;
         }
 
@@ -614,7 +759,7 @@
         });
 
         document.getElementById('btn-flag').onclick = () => { 
-            triggerVibrate(); saveUndo();
+            saveUndo();
             const roleKey = (userRole === 'admin') ? 'admin' : 'viewer';
             const logName = (userRole === 'admin') ? 'Judge' : 'Viewer';
             if (state.flag) {
@@ -635,12 +780,15 @@
                     updateInfList();
                 }
                 if (!document.getElementById('modal-log').classList.contains('hidden')) {
-                    document.getElementById('log-container').innerHTML = state.logs.map(l => `<div class="border-b border-slate-700/50 pb-1">${l}</div>`).join('');
+                    document.getElementById('log-container').innerHTML = state.logs.map(l => `<div style="border-bottom: 1px solid rgba(255,255,255,0.05);" class="pb-1">${l}</div>`).join('');
                 }
             } 
         };
 
-        document.getElementById('btn-log').onclick = () => { document.getElementById('log-container').innerHTML = state.logs.map(l => `<div class="border-b border-slate-700/50 pb-1">${l}</div>`).join(''); document.getElementById('modal-log').classList.remove('hidden'); };
+        document.getElementById('btn-log').onclick = () => { 
+            document.getElementById('log-container').innerHTML = state.logs.map(l => `<div style="border-bottom: 1px solid rgba(255,255,255,0.05);" class="pb-1">${l}</div>`).join(''); 
+            document.getElementById('modal-log').classList.remove('hidden'); 
+        };
         
         document.getElementById('btn-copy-log').onclick = async () => {
             const logString = state.logs.join('\n');
@@ -662,7 +810,6 @@
         
         // GESTIONE COLORBLIND TOGGLE
         document.getElementById('toggle-colorblind').onchange = (e) => {
-            triggerVibrate();
             if(e.target.checked) {
                 document.body.classList.add('colorblind-mode');
                 localStorage.setItem('cb-mode', 'true');
@@ -704,12 +851,39 @@
             const container = document.getElementById('confirm-buttons');
             container.innerHTML = '';
             if (options.downloadFirst) {
-                const b1 = document.createElement('button'); b1.className = "w-full bg-teal-600 p-3 rounded-xl font-bold uppercase text-xs"; b1.innerText = "Download log and Reset"; b1.onclick = () => { exportLog(); document.getElementById('modal-confirm').classList.add('hidden'); onYes(); }; container.appendChild(b1);
-                const b2 = document.createElement('button'); b2.className = "w-full bg-red-600 p-3 rounded-xl font-bold uppercase text-xs"; b2.innerText = "Just reset"; b2.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); onYes(); }; container.appendChild(b2);
-                const b3 = document.createElement('button'); b3.className = "w-full bg-slate-700 p-3 rounded-xl font-bold uppercase text-xs"; b3.innerText = "Cancel"; b3.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); if(onNo) onNo(); }; container.appendChild(b3);
+                const b1 = document.createElement('button'); 
+                b1.className = "w-full p-3 rounded-xl font-bold uppercase text-xs tracking-wider text-white active:scale-95 transition-all"; 
+                b1.style.cssText = "background: linear-gradient(135deg, #0d9488, #0f766e); box-shadow: 0 2px 12px rgba(13,148,136,0.3);";
+                b1.innerText = "Download log and Reset"; 
+                b1.onclick = () => { exportLog(); document.getElementById('modal-confirm').classList.add('hidden'); onYes(); }; 
+                container.appendChild(b1);
+                
+                const b2 = document.createElement('button'); 
+                b2.className = "w-full p-3 rounded-xl font-bold uppercase text-xs tracking-wider text-white active:scale-95 transition-all"; 
+                b2.style.cssText = "background: linear-gradient(135deg, #dc2626, #b91c1c);";
+                b2.innerText = "Just reset"; 
+                b2.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); onYes(); }; 
+                container.appendChild(b2);
+                
+                const b3 = document.createElement('button'); 
+                b3.className = "w-full p-3 rounded-xl font-bold uppercase text-xs tracking-wider text-slate-400 active:scale-95 transition-all"; 
+                b3.style.cssText = "background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07);";
+                b3.innerText = "Cancel"; 
+                b3.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); if(onNo) onNo(); }; 
+                container.appendChild(b3);
             } else {
-                const b1 = document.createElement('button'); b1.innerText = "Yes"; b1.className = "bg-red-600 p-3 rounded-xl font-bold flex-1"; b1.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); onYes(); };
-                const b2 = document.createElement('button'); b2.innerText = "No"; b2.className = "bg-slate-700 p-3 rounded-xl font-bold flex-1"; b2.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); if(onNo) onNo(); };
+                const b1 = document.createElement('button'); 
+                b1.innerText = "Yes"; 
+                b1.className = "p-3 rounded-xl font-bold flex-1 text-white active:scale-95 transition-all"; 
+                b1.style.cssText = "background: linear-gradient(135deg, #dc2626, #b91c1c);";
+                b1.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); onYes(); };
+                
+                const b2 = document.createElement('button'); 
+                b2.innerText = "No"; 
+                b2.className = "p-3 rounded-xl font-bold flex-1 text-slate-300 active:scale-95 transition-all"; 
+                b2.style.cssText = "background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.07);";
+                b2.onclick = () => { document.getElementById('modal-confirm').classList.add('hidden'); if(onNo) onNo(); };
+                
                 const div = document.createElement('div'); div.className="flex gap-2 w-full"; div.appendChild(b2); div.appendChild(b1); container.appendChild(div);
             }
             document.getElementById('modal-confirm').classList.remove('hidden');
@@ -720,7 +894,7 @@
         document.getElementById('btn-leave-room').onclick = () => { window.customConfirm("Leave current room?", () => { location.reload(); }); };
 
         const toggleWakeLock = async (enabled) => { if (enabled && 'wakeLock' in navigator) try { wakeLock = await navigator.wakeLock.request('screen'); } catch(e){} else if (wakeLock) { await wakeLock.release(); wakeLock = null; } };
-        document.getElementById('toggle-wakelock').onchange = (e) => { triggerVibrate(); toggleWakeLock(e.target.checked); };
+        document.getElementById('toggle-wakelock').onchange = (e) => { toggleWakeLock(e.target.checked); };
         
         document.addEventListener('visibilitychange', async () => { if (wakeLock !== null && document.visibilityState === 'visible') wakeLock = await navigator.wakeLock.request('screen'); });
 
@@ -733,7 +907,6 @@
         };
         
         window.toggleInfForm = (show) => { 
-            triggerVibrate(); 
             const form = document.getElementById('inf-form'); 
             const footer = document.getElementById('inf-footer'); 
             if(show) { 
