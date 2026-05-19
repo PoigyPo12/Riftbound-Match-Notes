@@ -40,7 +40,7 @@
                             class="col-span-2 border border-slate-700/60 rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm" placeholder="Judge Name">
                         <input type="number" id="setup-table-num" autocomplete="off" 
                             style="background: rgba(15,23,42,0.8); font-family: 'JetBrains Mono', monospace;"
-                            class="col-span-1 border border-slate-700/60 rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm text-center" placeholder="Table">
+                            class="col-span-1 border border-slate-700/60 rounded-xl p-3 text-slate-100 placeholder-slate-600 text-sm text-center" placeholder="Tbl">
                     </div>
                     <div class="space-y-3">
                         <input type="text" id="setup-p1-name" autocomplete="off" 
@@ -275,7 +275,7 @@
                     <div style="border-bottom: 1px solid rgba(255,255,255,0.05);" class="flex items-center justify-between p-3.5">
                         <div>
                             <span class="block font-bold text-slate-200 text-sm">Colorblind Mode</span>
-                            <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">High contrast colors</span>
+                            <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[WiP] High contrast colors</span>
                         </div>
                         <label class="switch scale-90 origin-right">
                             <input type="checkbox" id="toggle-colorblind">
@@ -390,8 +390,13 @@
         window.addEventListener('online', () => setStatus(true));
         window.addEventListener('offline', () => setStatus(false));
 
-        const triggerVibrate = () => {};
-        const sync = async () => { if (!currentRoom) return; await setDoc(doc(db, 'matches', currentRoom), state); };
+        let isSyncing = false;
+        const sync = async () => { 
+            if (!currentRoom) return; 
+            isSyncing = true;
+            await setDoc(doc(db, 'matches', currentRoom), state);
+            isSyncing = false;
+        };
         const saveUndo = () => { undoStack.push(JSON.stringify(state)); if (undoStack.length > 30) undoStack.shift(); };
 
         const addLog = (msg) => { 
@@ -616,11 +621,10 @@
             saveUndo(); 
             const oldVal = state[p][s] || 0; 
             state[p][s] = Math.max(0, oldVal + d); 
-            if (oldVal !== state[p][s]) { 
-                let logStr = `[${state[p].name}] ${stats.find(x=>x.id===s).label.replace(/🌀 |🖐🏻 |♻️ /g, '')}: ${oldVal} -> ${state[p][s]}`;
-                if (reason && d > 0) logStr += ` (${reason})`;
-                addLog(logStr); 
-            }
+            if (oldVal === state[p][s]) return; // valore invariato, niente sync
+            let logStr = `[${state[p].name}] ${stats.find(x=>x.id===s).label.replace(/🌀 |🖐🏻 |♻️ /g, '')}: ${oldVal} -> ${state[p][s]}`;
+            if (reason && d > 0) logStr += ` (${reason})`;
+            addLog(logStr); 
             sync(); render();
         };
 
@@ -725,8 +729,11 @@
             window.history.pushState({ noBackExits: true }, "");
         
             if (unsubscribeRoom) unsubscribeRoom();
-            unsubscribeRoom = onSnapshot(doc(db, 'matches', currentRoom), { includeMetadataChanges: true },(s) => { 
-                if (s.exists()) { 
+            unsubscribeRoom = onSnapshot(doc(db, 'matches', currentRoom), { includeMetadataChanges: true }, (s) => { 
+                if (s.exists()) {
+                    // Ignora il riflesso delle proprie scritture: se è dalla cache
+                    // locale e stiamo sincronizzando noi stessi, saltiamo il re-render
+                    if (isSyncing && s.metadata.fromCache) return;
                     const newData = s.data();
                     if (userRole === 'admin' && newData.flag !== state.flag) {
                         saveUndo();
@@ -734,7 +741,6 @@
                     state.timerSeconds = newData.timerSeconds;
                     state.timerActive = newData.timerActive;
                     state.timerStartedAt = newData.timerStartedAt;
-                    
                     state = newData; 
                     setStatus(!s.metadata.fromCache && navigator.onLine);
                     render(); 
@@ -806,7 +812,10 @@
             document.getElementById('modal-settings').classList.remove('hidden'); 
         };
         
-        document.querySelectorAll('.close-modal').forEach(b => b.onclick = (e) => { e.target.closest('.modal-overlay').classList.add('hidden'); });
+        document.querySelectorAll('.close-modal').forEach(b => b.onclick = (e) => { 
+            e.target.closest('.modal-overlay').classList.add('hidden');
+            isEditingTable = false;
+        });
         
         // GESTIONE COLORBLIND TOGGLE
         document.getElementById('toggle-colorblind').onchange = (e) => {
@@ -836,13 +845,13 @@
         };
 
         document.getElementById('btn-reset-match').onclick = () => {
-            window.customConfirm("Reset stats and logs? Infractions will be kept", async () => { 
+            window.customConfirm("Reset stats and logs? Infractions will be kept", () => { 
                 saveUndo();
                 ['p1', 'p2'].forEach(p => { state[p].points = 0; state[p].xp = 0; state[p].hand = 4; state[p].runes = 0; state[p].energy = 0; state[p].power = 0; state[p].recycled = 0; state[p].active = false; state[p].turnCount = 0; });
                 state.logs = []; state.flag = false; state.flagIssuer = null; state.flaggedStats = {};
                 state.timerSeconds = 0; state.timerActive = false;
                 addLog(`Match Started - Table ${state.tableNum} - Room: ${currentRoom}`);
-                await sync(); render();
+                sync(); render();
             }, null, { downloadFirst: true });
         };
 
