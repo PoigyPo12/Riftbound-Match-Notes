@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+
 body { 
-    font-family: 'Inter', sans-serif; 
-    background-color: #0f172a; 
-    color: #f8fafc; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background-color: #060a14; 
+    color: #e2e8f0; 
     -webkit-tap-highlight-color: transparent; 
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-image: 
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(13, 148, 136, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(249, 115, 22, 0.07) 0%, transparent 60%);
+    background-attachment: fixed;
 }
 
 .safe-padding {
@@ -13,11 +22,26 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
 }
 
-.theme-p1 { background-color: rgba(13, 148, 136, 0.1); border-color: rgba(13, 148, 136, 0.3); }
-.theme-p2 { background-color: rgba(249, 115, 22, 0.05); border-color: rgba(249, 115, 22, 0.15); }
+/* ===== PLAYER THEMES ===== */
+.theme-p1 { 
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(6, 182, 212, 0.04) 100%);
+    border-color: rgba(13, 148, 136, 0.25); 
+}
+.theme-p2 { 
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.07) 0%, rgba(251, 146, 60, 0.03) 100%);
+    border-color: rgba(249, 115, 22, 0.18); 
+}
 
-.active-turn-p1 { border-color: rgba(20, 184, 166, 0.8); box-shadow: 0 0 20px rgba(20, 184, 166, 0.1) inset; }
-.active-turn-p2 { border-color: rgba(249, 115, 22, 0.8); box-shadow: 0 0 20px rgba(249, 115, 22, 0.1) inset; }
+.active-turn-p1 { 
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.22) 0%, rgba(6, 182, 212, 0.10) 100%) !important;
+    border-color: rgba(20, 184, 166, 0.75) !important; 
+    box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.15), 0 0 28px rgba(20, 184, 166, 0.13) inset, 0 0 40px -12px rgba(20, 184, 166, 0.35);
+}
+.active-turn-p2 { 
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.20) 0%, rgba(251, 146, 60, 0.08) 100%) !important;
+    border-color: rgba(249, 115, 22, 0.75) !important; 
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.15), 0 0 28px rgba(249, 115, 22, 0.13) inset, 0 0 40px -12px rgba(249, 115, 22, 0.35);
+}
 
 .turn-flash { 
     animation: flash-glow-intense 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -27,124 +51,188 @@ body {
 
 @keyframes flash-glow-intense { 
     0% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-    30% { transform: scale(1.01); filter: brightness(1.5); box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.4); }
+    30% { transform: scale(1.015); filter: brightness(1.6); box-shadow: 0 0 40px 12px rgba(255, 255, 255, 0.35); }
     100% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
 
+/* ===== STAT CARDS ===== */
 .stat-card { 
-    background-color: rgba(30, 41, 59, 0.8); 
-    border-radius: 0.75rem; 
-    padding: 0.5rem; 
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 0.875rem; 
+    padding: 0.6rem 0.5rem; 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    border: 1px solid rgba(255,255,255,0.05); 
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.06); 
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.stat-card:active {
+    transform: scale(0.98);
 }
 
 .stat-flagged {
-    background-color: rgba(220, 38, 38, 0.25) !important;
-    border: 1px solid rgba(220, 38, 38, 0.6) !important;
-    box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+    background: rgba(220, 38, 38, 0.15) !important;
+    border: 1px solid rgba(220, 38, 38, 0.5) !important;
+    box-shadow: 0 0 16px rgba(220, 38, 38, 0.2), inset 0 1px 0 rgba(255,255,255,0.04) !important;
 }
 
+/* ===== STAT BUTTONS ===== */
 .btn-stat { 
     width: 2.8rem;
     height: 2.6rem; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    background-color: #334155; 
-    border-radius: 0.5rem; 
+    background: rgba(51, 65, 85, 0.7); 
+    border-radius: 0.625rem; 
     font-size: 1.2rem; 
-    font-weight: bold; 
-    color: white; 
-    transition: all 0.1s; 
+    font-weight: 700; 
+    color: #e2e8f0; 
+    transition: background 0.12s, transform 0.08s, box-shadow 0.12s; 
     touch-action: manipulation; 
     cursor: pointer;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-.btn-stat:active { background-color: #475569; transform: scale(0.92); }
+.btn-stat:active { 
+    background: rgba(71, 85, 105, 0.9); 
+    transform: scale(0.9); 
+    box-shadow: none;
+}
 
+/* ===== JUDGE CALL OVERLAY ===== */
 .judge-call-active::after {
     content: '';
     position: fixed;
     inset: 0;
-    background-color: rgba(220, 38, 38, 0.3);
+    background:
+        radial-gradient(ellipse 90% 45% at 0% 0%,    rgba(220, 38, 38, 0.36) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 45% at 100% 100%, rgba(220, 38, 38, 0.36) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 30% at 100% 0%,  rgba(220, 38, 38, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 30% at 0% 100%,  rgba(220, 38, 38, 0.22) 0%, transparent 55%),
+        linear-gradient(to right,  rgba(220, 38, 38, 0.18) 0%, transparent 18%, transparent 82%, rgba(220, 38, 38, 0.18) 100%),
+        linear-gradient(to bottom, rgba(220, 38, 38, 0.18) 0%, transparent 18%, transparent 82%, rgba(220, 38, 38, 0.18) 100%);
     pointer-events: none;
     z-index: 9999;
-    animation: pulse-overlay 3s infinite ease-in-out;
+    animation: pulse-overlay 2.2s infinite ease-in-out;
 }
 
 @keyframes pulse-overlay {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.9; }
+    0%, 100% { opacity: 0.45; }
+    50%       { opacity: 1;    }
 }
 
-.flag-active { animation: pulse-red 2s infinite; background-color: #b91c1c !important; }
-@keyframes pulse-red { 
-    0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); } 
-    70% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); } 
-    100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); } 
+.flag-active { 
+    animation: pulse-red 2.4s infinite ease-in-out !important;
+    background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+    border: 1px solid rgba(248, 113, 113, 0.5) !important;
+}
+@keyframes pulse-red {
+    0%   { box-shadow: 0 0 0 0 rgba(220,38,38,0), 0 0 8px 2px rgba(248,113,113,0.25), inset 0 1px 0 rgba(255,255,255,0.12); filter: brightness(1); }
+    40%  { box-shadow: 0 0 0 7px rgba(220,38,38,0.18), 0 0 18px 5px rgba(248,113,113,0.35), inset 0 1px 0 rgba(255,255,255,0.12); filter: brightness(1.18); }
+    70%  { box-shadow: 0 0 0 13px rgba(220,38,38,0.04), 0 0 10px 2px rgba(248,113,113,0.15), inset 0 1px 0 rgba(255,255,255,0.12); filter: brightness(1); }
+    100% { box-shadow: 0 0 0 0 rgba(220,38,38,0), 0 0 8px 2px rgba(248,113,113,0.25), inset 0 1px 0 rgba(255,255,255,0.12); filter: brightness(1); }
 }
 
+/* ===== MY TURN BUTTON FEEDBACK ===== */
+.btn-next-flash {
+    animation: next-confirm 0.5s ease-out forwards !important;
+}
+
+@keyframes next-confirm {
+    0%   { transform: scale(1);    background-color: #334155; box-shadow: none; }
+    25%  { transform: scale(0.93); background-color: #0d9488; box-shadow: 0 0 0 3px rgba(20,184,166,0.35); }
+    60%  { transform: scale(1.04); background-color: #0f766e; box-shadow: 0 0 0 6px rgba(20,184,166,0.12); }
+    100% { transform: scale(1);    background-color: #334155; box-shadow: none; }
+}
 .play-area { display: flex; flex-direction: column; gap: 0.75rem; padding: 0.75rem; padding-bottom: 1rem; }
 @media (min-width: 768px), (orientation: landscape) { 
     .play-area { flex-direction: row; align-items: stretch; } 
     .player-board { flex: 1; min-height: 400px; } 
 }
 
-.modal-overlay { background-color: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
-.edit-input { background: #0f172a; border: 1px solid #14b8a6; border-radius: 4px; padding: 2px 8px; color: white; width: 120px; outline: none; }
+/* ===== MODALS ===== */
+.modal-overlay { 
+    background: rgba(0,0,0,0.88); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+}
 
+/* ===== INPUTS ===== */
+.edit-input { 
+    background: rgba(6, 10, 20, 0.9); 
+    border: 1px solid rgba(20, 184, 166, 0.6); 
+    border-radius: 6px; 
+    padding: 3px 8px; 
+    color: #e2e8f0; 
+    width: 120px; 
+    outline: none; 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.edit-input:focus {
+    border-color: rgba(20, 184, 166, 0.9);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+}
+
+/* ===== FOOTER LOG ===== */
 .footer-log {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 2rem;
-    background-color: #020617;
-    border-top: 1px solid #1e293b;
-    color: #64748b;
+    background: rgba(2, 6, 23, 0.95);
+    border-top: 1px solid rgba(30, 41, 59, 0.8);
+    color: #475569;
     font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
     display: flex;
     align-items: center;
     padding: 0 1rem;
     z-index: 45;
     pointer-events: none;
+    letter-spacing: 0.02em;
 }
 
+/* ===== INFRACTION INDICATORS ===== */
 .infraction-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #ef4444;
+    width: 7px;
+    height: 7px;
+    background: #ef4444;
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 4px #ef4444;
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.8);
 }
 
 .infraction-square {
-    width: 6px;
-    height: 6px;
-    background-color: #eab308; /* Giallo */
+    width: 7px;
+    height: 7px;
+    background: #eab308;
+    border-radius: 1px;
     display: inline-block;
-    box-shadow: 0 0 4px #eab308;
+    box-shadow: 0 0 6px rgba(234, 179, 8, 0.8);
 }
 
 .infraction-triangle {
     width: 0;
     height: 0;
-    border-left: 3.5px solid transparent;
-    border-right: 3.5px solid transparent;
-    border-bottom: 6px solid #f8fafc; /* Bianco */
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 7px solid #f8fafc;
     display: inline-block;
-    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
     transform: translateY(-1px);
 }
 
+/* ===== SHIELD BUTTON ===== */
 .btn-shield {
-    background-color: rgba(51, 65, 85, 0.5);
-    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(51, 65, 85, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 0.5rem;
     width: 2rem;
     height: 2rem;
@@ -153,38 +241,60 @@ body {
     justify-content: center;
     transition: all 0.2s;
 }
-.btn-shield:active { transform: scale(0.9); background-color: rgba(51, 65, 85, 0.8); }
+.btn-shield:active { transform: scale(0.88); background: rgba(51, 65, 85, 0.7); }
 
+/* ===== TOGGLE SWITCH ===== */
 .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 24px; }
-.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-input:checked + .slider { background-color: #14b8a6; }
-input:checked + .slider:before { transform: translateX(20px); }
+.slider { 
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; 
+    background: rgba(51, 65, 85, 0.9); 
+    transition: .35s cubic-bezier(0.4, 0, 0.2, 1); 
+    border-radius: 24px; 
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.slider:before { 
+    position: absolute; content: ""; height: 18px; width: 18px; 
+    left: 2px; bottom: 2px; 
+    background: #e2e8f0; 
+    transition: .35s cubic-bezier(0.4, 0, 0.2, 1); 
+    border-radius: 50%; 
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+input:checked + .slider { background: #0d9488; border-color: rgba(20, 184, 166, 0.3); }
+input:checked + .slider:before { transform: translateX(20px); background: white; }
 
+/* ===== TIMER ===== */
 .timer-container {
-    background: rgba(30, 41, 59, 0.5);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.05);
-    padding: 1rem;
+    padding: 1rem 1rem 0.75rem;
     margin: 0 0.75rem 4rem 0.75rem;
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
 }
+
 .timer-display {
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 900;
-    font-size: 2.5rem;
-    color: #f8fafc;
-    letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(255,255,255,0.1);
+    font-weight: 800;
+    font-size: 2.75rem;
+    color: #f1f5f9;
+    letter-spacing: 3px;
+    text-shadow: 0 0 30px rgba(20, 184, 166, 0.25), 0 0 60px rgba(20, 184, 166, 0.1);
+    line-height: 1;
 }
 
-.text-energy-label { color: #cba6f7 !important; } 
-.text-power-label { color: #cba6f7 !important; }  
+/* ===== LABEL COLORS ===== */
+.text-energy-label { color: #a78bfa !important; }
+.text-power-label { color: #a78bfa !important; }
 
+/* ===== TABLE INPUT INLINE ===== */
 .input-tbl-inline {
     background: transparent;
     border: none;
@@ -193,6 +303,7 @@ input:checked + .slider:before { transform: translateX(20px); }
     max-width: 4ch;
     font-weight: inherit;
     font-size: inherit;
+    font-family: 'JetBrains Mono', monospace;
     text-align: center;
     outline: none;
     padding: 0 !important;
@@ -205,47 +316,202 @@ input:checked + .slider:before { transform: translateX(20px); }
     margin: 0; 
 }
 
-/* --- COLORBLIND MODE OVERRIDES --- */
-body.colorblind-mode .bg-teal-600 { background-color: #2563eb !important; } /* Blue for primary actions */
+/* ===== SETUP SCREEN ===== */
+#setup-screen input {
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+#setup-screen input:focus {
+    outline: none;
+    border-color: rgba(20, 184, 166, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12) !important;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: rgba(6, 10, 20, 0.85) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom-color: rgba(30, 41, 59, 0.6) !important;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.03), 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== COLORBLIND MODE (deuteranopia / protanopia safe) =====
+   Palette: 
+     Primary action  → #1d6fe8  (vivid blue)
+     Alert / danger  → #e07b00  (amber-orange, not red)
+     P1 theme        → #1d6fe8  (blue)
+     P2 theme        → #c96000  (dark amber)
+     Stat flagged    → #e07b00  (orange)
+     Infraction GPE  → #e07b00  (orange dot)
+     Infraction TE   → #1d6fe8  (blue square)
+     Infraction UC   → #f0f0f0  (white triangle, unchanged)
+     Judge call      → #c96000  (amber overlay)
+*/
+
+body.colorblind-mode {
+    /* Re-tint background gradients */
+    background-image:
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(29, 111, 232, 0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(201, 96, 0, 0.09) 0%, transparent 60%) !important;
+}
+
+/* Primary teal → blue */
+body.colorblind-mode .bg-teal-600 { background-color: #1d6fe8 !important; }
 body.colorblind-mode .hover\:bg-teal-500:hover { background-color: #3b82f6 !important; }
-body.colorblind-mode .text-teal-400, body.colorblind-mode .text-teal-300 { color: #60a5fa !important; }
-body.colorblind-mode input:checked + .slider { background-color: #2563eb !important; }
-body.colorblind-mode .edit-input { border-color: #2563eb !important; }
+body.colorblind-mode .text-teal-400,
+body.colorblind-mode .text-teal-300 { color: #60a5fa !important; }
+body.colorblind-mode input:checked + .slider { 
+    background-color: #1d6fe8 !important; 
+    border-color: rgba(29, 111, 232, 0.4) !important;
+}
+body.colorblind-mode .edit-input { border-color: #1d6fe8 !important; }
 
-body.colorblind-mode .bg-red-600 { background-color: #d946ef !important; } /* Magenta for alerts/cancels */
-body.colorblind-mode .text-red-400 { color: #f472b6 !important; }
-body.colorblind-mode .bg-red-900\/50 { background-color: rgba(192, 38, 211, 0.3) !important; border-color: rgba(192, 38, 211, 0.6) !important;}
-body.colorblind-mode .text-red-200 { color: #fdf4ff !important; }
-body.colorblind-mode .hover\:bg-red-800:hover { background-color: rgba(192, 38, 211, 0.5) !important; }
+/* Player board tints */
+body.colorblind-mode .theme-p1 {
+    background: linear-gradient(135deg, rgba(29, 111, 232, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%) !important;
+    border-color: rgba(29, 111, 232, 0.28) !important;
+}
+body.colorblind-mode .theme-p2 {
+    background: linear-gradient(135deg, rgba(201, 96, 0, 0.09) 0%, rgba(234, 179, 8, 0.04) 100%) !important;
+    border-color: rgba(201, 96, 0, 0.22) !important;
+}
 
-body.colorblind-mode .infraction-dot { background-color: #d946ef !important; box-shadow: 0 0 4px #d946ef !important; }
-body.colorblind-mode .infraction-square { background-color: #0ea5e9 !important; box-shadow: 0 0 4px #0ea5e9 !important; }
+/* Active turn glow */
+body.colorblind-mode .active-turn-p1 { 
+    background: linear-gradient(135deg, rgba(29, 111, 232, 0.22) 0%, rgba(59, 130, 246, 0.09) 100%) !important;
+    border-color: rgba(59, 130, 246, 0.85) !important; 
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.18), 0 0 28px rgba(59, 130, 246, 0.14) inset, 0 0 40px -12px rgba(59, 130, 246, 0.38) !important;
+}
+body.colorblind-mode .active-turn-p2 {
+    background: linear-gradient(135deg, rgba(201, 96, 0, 0.22) 0%, rgba(234, 179, 8, 0.06) 100%) !important;
+    border-color: rgba(201, 96, 0, 0.85) !important;
+    box-shadow: 0 0 0 1px rgba(201, 96, 0, 0.18), 0 0 28px rgba(201, 96, 0, 0.14) inset, 0 0 40px -12px rgba(201, 96, 0, 0.38) !important;
+}
 
+/* Stat cards: dashed outline as colour-independent visual cue */
+body.colorblind-mode .stat-card {
+    border-style: dashed !important;
+    border-color: rgba(255,255,255,0.18) !important;
+}
+
+/* Stat flagged → orange + thicker dashed border */
+body.colorblind-mode .stat-flagged {
+    background: rgba(224, 123, 0, 0.18) !important;
+    border: 2px dashed rgba(224, 123, 0, 0.75) !important;
+    box-shadow: 0 0 16px rgba(224, 123, 0, 0.22), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* ---- Modal overrides ---- */
+
+/* Confirm modal buttons */
+body.colorblind-mode #modal-confirm .bg-teal-600,
+body.colorblind-mode #modal-confirm [style*="0d9488"],
+body.colorblind-mode #modal-confirm [style*="0f766e"] {
+    background: linear-gradient(135deg, #1d6fe8, #1558c0) !important;
+    box-shadow: 0 2px 12px rgba(29, 111, 232, 0.35) !important;
+}
+body.colorblind-mode #modal-confirm [style*="dc2626"],
+body.colorblind-mode #modal-confirm [style*="b91c1c"] {
+    background: linear-gradient(135deg, #e07b00, #c96000) !important;
+    box-shadow: 0 2px 12px rgba(224, 123, 0, 0.35) !important;
+}
+
+/* Infractions modal */
+body.colorblind-mode #modal-infractions #inf-player-name { color: #60a5fa !important; }
+body.colorblind-mode #modal-infractions #btn-add-infraction:not(:disabled) {
+    background: linear-gradient(135deg, #e07b00, #c96000) !important;
+}
+body.colorblind-mode #modal-infractions [onclick="toggleInfForm(true)"] {
+    border-color: rgba(29, 111, 232, 0.3) !important;
+}
+
+/* Log modal */
+body.colorblind-mode #modal-log #btn-export {
+    background: linear-gradient(135deg, #1d6fe8, #1558c0) !important;
+    box-shadow: 0 2px 12px rgba(29, 111, 232, 0.3) !important;
+}
+
+/* Settings modal: save button, reset button, links */
+body.colorblind-mode #btn-save-judge {
+    background: linear-gradient(135deg, #1d6fe8, #1558c0) !important;
+}
+body.colorblind-mode #btn-reset-match {
+    background: rgba(201, 96, 0, 0.2) !important;
+    border-color: rgba(224, 123, 0, 0.45) !important;
+    color: #fed7aa !important;
+}
+body.colorblind-mode #modal-settings a[href*="auditor"] {
+    background: rgba(29, 111, 232, 0.15) !important;
+    border-color: rgba(29, 111, 232, 0.3) !important;
+    color: #93c5fd !important;
+}
+body.colorblind-mode #modal-settings a[href*="ruinrunner"] {
+    background: rgba(124, 58, 237, 0.15) !important;
+    border-color: rgba(124, 58, 237, 0.3) !important;
+    color: #c4b5fd !important;
+}
+
+/* Alert / danger red → amber-orange */
+body.colorblind-mode .bg-red-600 { background-color: #e07b00 !important; }
+body.colorblind-mode .text-red-400 { color: #fb923c !important; }
+body.colorblind-mode .bg-red-900\/50 { 
+    background-color: rgba(201, 96, 0, 0.25) !important; 
+    border-color: rgba(201, 96, 0, 0.55) !important; 
+}
+body.colorblind-mode .text-red-200 { color: #fed7aa !important; }
+body.colorblind-mode .hover\:bg-red-800:hover { background-color: rgba(201, 96, 0, 0.45) !important; }
+
+/* Infraction indicators: orange · blue square · white triangle */
+body.colorblind-mode .infraction-dot { 
+    background-color: #e07b00 !important; 
+    box-shadow: 0 0 6px rgba(224, 123, 0, 0.9) !important; 
+}
+body.colorblind-mode .infraction-square { 
+    background-color: #1d6fe8 !important; 
+    box-shadow: 0 0 6px rgba(29, 111, 232, 0.9) !important; 
+}
+
+/* Judge call overlay → amber, corner + perimeter for mobile coverage */
 body.colorblind-mode .judge-call-active::after {
-    background-color: rgba(217, 70, 239, 0.3) !important;
+    background:
+        radial-gradient(ellipse 90% 45% at 0% 0%,    rgba(224, 123, 0, 0.36) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 45% at 100% 100%, rgba(224, 123, 0, 0.36) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 30% at 100% 0%,  rgba(224, 123, 0, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 30% at 0% 100%,  rgba(224, 123, 0, 0.22) 0%, transparent 55%),
+        linear-gradient(to right,  rgba(224, 123, 0, 0.18) 0%, transparent 18%, transparent 82%, rgba(224, 123, 0, 0.18) 100%),
+        linear-gradient(to bottom, rgba(224, 123, 0, 0.18) 0%, transparent 18%, transparent 82%, rgba(224, 123, 0, 0.18) 100%) !important;
 }
+
+/* Flag button → orange pulse */
 body.colorblind-mode .flag-active { 
-    background-color: #c026d3 !important; 
-    animation: pulse-cb 2s infinite !important; 
+    background: linear-gradient(135deg, #e07b00, #c96000) !important;
+    border: 1px solid rgba(251, 146, 60, 0.5) !important;
+    animation: pulse-cb 2.4s infinite ease-in-out !important; 
 }
 
+/* Timer buttons */
 body.colorblind-mode #btn-timer-toggle { 
-    background-color: #fbbf24 !important; 
-    color: #0f172a !important; 
+    background: linear-gradient(135deg, #1d6fe8, #1558c0) !important;
+    box-shadow: 0 2px 12px rgba(29, 111, 232, 0.4) !important;
+    color: #ffffff !important; 
+}
+body.colorblind-mode #btn-timer-set {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9) !important;
+    box-shadow: 0 2px 12px rgba(124, 58, 237, 0.4) !important;
+}
+body.colorblind-mode #btn-timer-reset { 
+    background: rgba(30, 41, 59, 0.9) !important; 
+    color: #cbd5e1 !important; 
 }
 
-body.colorblind-mode #btn-timer-reset { 
-    background-color: #f8fafc !important; 
-    color: #0f172a !important; 
+/* Timer glow → blue */
+body.colorblind-mode .timer-display {
+    text-shadow: 0 0 30px rgba(29, 111, 232, 0.35), 0 0 60px rgba(29, 111, 232, 0.15) !important;
 }
 
 @keyframes pulse-cb { 
-    0% { box-shadow: 0 0 0 0 rgba(217, 70, 239, 0.6); } 
-    70% { box-shadow: 0 0 0 12px rgba(217, 70, 239, 0); } 
-    100% { box-shadow: 0 0 0 0 rgba(217, 70, 239, 0); } 
-}
-
-body.colorblind-mode .active-turn-p1 { 
-    border-color: rgba(59, 130, 246, 0.8) !important; 
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1) inset !important; 
+    0%   { box-shadow: 0 0 0 0 rgba(201,96,0,0), 0 0 8px 2px rgba(251,146,60,0.25); filter: brightness(1); }
+    40%  { box-shadow: 0 0 0 7px rgba(201,96,0,0.18), 0 0 18px 5px rgba(251,146,60,0.35); filter: brightness(1.18); }
+    70%  { box-shadow: 0 0 0 13px rgba(201,96,0,0.04), 0 0 10px 2px rgba(251,146,60,0.15); filter: brightness(1); }
+    100% { box-shadow: 0 0 0 0 rgba(201,96,0,0), 0 0 8px 2px rgba(251,146,60,0.25); filter: brightness(1); }
 }
