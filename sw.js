@@ -1,8 +1,7 @@
 // sw.js — RB Match Buddy
-// Strategy:
 //   • Static assets (CSS, icons, manifest) → Cache-first
 //   • HTML shell                           → Network-first with cache fallback
-//   • Firebase / Firestore / Google APIs   → Pass-through (SDK handles offline)
+//   • Firebase / Firestore / Google APIs   → Pass-through 
 
 const CACHE_NAME = 'rb-match-buddy-v1';
 
@@ -15,7 +14,7 @@ const STATIC_ASSETS = [
   './icon/icon-512.png',
 ];
 
-// Domains to never intercept — let Firebase SDK handle these entirely
+//No interception
 const PASSTHROUGH_ORIGINS = [
   'firestore.googleapis.com',
   'firebase.googleapis.com',
@@ -54,7 +53,7 @@ self.addEventListener('fetch', event => {
 
   // 1. Always pass through Firebase/Google requests untouched
   if (PASSTHROUGH_ORIGINS.some(origin => url.hostname.includes(origin))) {
-    return; // no event.respondWith → browser handles normally
+    return; 
   }
 
   // 2. Only handle GET requests
@@ -66,8 +65,7 @@ self.addEventListener('fetch', event => {
               || url.pathname.endsWith('/');
 
   if (isHTML) {
-    // Network-first for HTML: always try to get the freshest shell,
-    // fall back to cache if offline
+    // Network-first for HTML
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -84,7 +82,6 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
-        // Not in cache yet — fetch, store, return
         return fetch(event.request).then(response => {
           if (response.ok) {
             const clone = response.clone();
